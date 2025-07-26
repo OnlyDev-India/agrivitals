@@ -4,16 +4,12 @@ import useClickableCard from '@/utilities/useClickableCard'
 import Link from 'next/link'
 import React, { Fragment } from 'react'
 
-import type { Post } from '@/payload-types'
-
 import { Media } from '@/components/Media'
-
-export type CardPostData = Pick<Post, 'slug' | 'categories' | 'meta' | 'title'>
 
 export const Card: React.FC<{
   alignItems?: 'center'
   className?: string
-  doc?: CardPostData
+  doc?: any
   relationTo?: 'posts'
   showCategories?: boolean
   title?: string
