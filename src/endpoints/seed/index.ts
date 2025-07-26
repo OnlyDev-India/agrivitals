@@ -125,16 +125,11 @@ export const seed = async ({
 
   payload.logger.info(`— Seeding pages...`)
 
-  const [_, contactPage] = await Promise.all([
+  const [_] = await Promise.all([
     payload.create({
       collection: 'pages',
       depth: 0,
       data: home({ heroImage: hero1Doc, metaImage: image2Doc }),
-    }),
-    payload.create({
-      collection: 'pages',
-      depth: 0,
-      data: contactPageData({ contactForm: contactForm }),
     }),
   ])
 

@@ -176,7 +176,21 @@ export interface Page {
       | null;
     media?: (number | null) | Media;
   };
-  layout: (CallToActionBlock | ContentBlock | MediaBlock | FormBlock)[];
+  layout: {
+    sectionName: string;
+    layouts?:
+      | {
+          layoutType: 'full' | 'split';
+          fullBlock?: (CallToActionBlock | ContentBlock | MediaBlock | FormBlock | CardsBlock)[] | null;
+          leftBlock?: (CallToActionBlock | ContentBlock | MediaBlock | FormBlock)[] | null;
+          rightBlock?: (CallToActionBlock | ContentBlock | MediaBlock | FormBlock)[] | null;
+          id?: string | null;
+        }[]
+      | null;
+    id?: string | null;
+    blockName?: string | null;
+    blockType: 'section';
+  }[];
   meta?: {
     title?: string | null;
     /**
@@ -185,9 +199,9 @@ export interface Page {
     image?: (number | null) | Media;
     description?: string | null;
   };
-  publishedAt?: string | null;
   slug?: string | null;
   slugLock?: boolean | null;
+  publishedAt?: string | null;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -576,6 +590,29 @@ export interface Form {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CardsBlock".
+ */
+export interface CardsBlock {
+  title?: string | null;
+  description?: string | null;
+  cards?:
+    | {
+        title: string;
+        description: string;
+        image?: (number | null) | Media;
+        link?: {
+          url?: string | null;
+          label?: string | null;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'cards';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users".
  */
 export interface User {
@@ -836,10 +873,44 @@ export interface PagesSelect<T extends boolean = true> {
   layout?:
     | T
     | {
-        cta?: T | CallToActionBlockSelect<T>;
-        content?: T | ContentBlockSelect<T>;
-        mediaBlock?: T | MediaBlockSelect<T>;
-        formBlock?: T | FormBlockSelect<T>;
+        section?:
+          | T
+          | {
+              sectionName?: T;
+              layouts?:
+                | T
+                | {
+                    layoutType?: T;
+                    fullBlock?:
+                      | T
+                      | {
+                          cta?: T | CallToActionBlockSelect<T>;
+                          content?: T | ContentBlockSelect<T>;
+                          mediaBlock?: T | MediaBlockSelect<T>;
+                          formBlock?: T | FormBlockSelect<T>;
+                          cards?: T | CardsBlockSelect<T>;
+                        };
+                    leftBlock?:
+                      | T
+                      | {
+                          cta?: T | CallToActionBlockSelect<T>;
+                          content?: T | ContentBlockSelect<T>;
+                          mediaBlock?: T | MediaBlockSelect<T>;
+                          formBlock?: T | FormBlockSelect<T>;
+                        };
+                    rightBlock?:
+                      | T
+                      | {
+                          cta?: T | CallToActionBlockSelect<T>;
+                          content?: T | ContentBlockSelect<T>;
+                          mediaBlock?: T | MediaBlockSelect<T>;
+                          formBlock?: T | FormBlockSelect<T>;
+                        };
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
       };
   meta?:
     | T
@@ -848,9 +919,9 @@ export interface PagesSelect<T extends boolean = true> {
         image?: T;
         description?: T;
       };
-  publishedAt?: T;
   slug?: T;
   slugLock?: T;
+  publishedAt?: T;
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
@@ -920,6 +991,30 @@ export interface FormBlockSelect<T extends boolean = true> {
   form?: T;
   enableIntro?: T;
   introContent?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CardsBlock_select".
+ */
+export interface CardsBlockSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  cards?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+        link?:
+          | T
+          | {
+              url?: T;
+              label?: T;
+            };
+        id?: T;
+      };
   id?: T;
   blockName?: T;
 }

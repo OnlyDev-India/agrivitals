@@ -12,19 +12,30 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText 
   const { setHeaderTheme } = useHeaderTheme()
 
   useEffect(() => {
-    setHeaderTheme('dark')
+    setHeaderTheme('light')
   })
 
   return (
     <div
-      className="relative -mt-[10.4rem] flex items-center justify-center text-white"
-      data-theme="dark"
+      className="relative"
+      style={{
+        backgroundImage:
+          'repeating-linear-gradient(0deg,rgba(0,0,0,0.03),rgba(0,0,0,0.03) 1px,transparent 1px,transparent 32px),repeating-linear-gradient(90deg,rgba(0,0,0,0.03),rgba(0,0,0,0.03) 1px,transparent 1px,transparent 32px)',
+      }}
     >
-      <div className="container mb-8 z-10 relative flex items-center justify-center">
-        <div className="max-w-[36.5rem] md:text-center">
-          {richText && <RichText className="mb-6" data={richText} enableGutter={false} />}
+      {/* Text content section with box pattern background */}
+      <div className="container py-16 text-center relative z-10">
+        {/* Main content */}
+        <div className="max-w-2xl mx-auto">
+          {richText && (
+            <RichText
+              className="mb-6 font-bold text-gray-900 leading-tight"
+              data={richText}
+              enableGutter={false}
+            />
+          )}
           {Array.isArray(links) && links.length > 0 && (
-            <ul className="flex md:justify-center gap-4">
+            <ul className="flex justify-center gap-4">
               {links.map(({ link }, i) => {
                 return (
                   <li key={i}>
@@ -36,11 +47,15 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText 
           )}
         </div>
       </div>
-      <div className="min-h-[80vh] select-none">
-        {media && typeof media === 'object' && (
-          <Media fill imgClassName="-z-10 object-cover" priority resource={media} />
-        )}
-      </div>
+
+      {/* Landscape image section */}
+      {media && typeof media === 'object' && (
+        <div className="w-full h-96 md:h-[500px] relative">
+          <Media fill imgClassName="object-cover" priority resource={media} />
+          {/* Gradient overlay for blurry transition effect */}
+          <div className="absolute inset-0 bg-gradient-to-b from-white dark:from-gray-900 via-white/20 dark:via-gray-900/20 to-transparent pointer-events-none "></div>
+        </div>
+      )}
     </div>
   )
 }

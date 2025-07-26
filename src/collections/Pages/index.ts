@@ -2,10 +2,7 @@ import type { CollectionConfig } from 'payload'
 
 import { authenticated } from '../../access/authenticated'
 import { authenticatedOrPublished } from '../../access/authenticatedOrPublished'
-import { CallToAction } from '../../blocks/CallToAction/config'
-import { Content } from '../../blocks/Content/config'
-import { FormBlock } from '../../blocks/Form/config'
-import { MediaBlock } from '../../blocks/MediaBlock/config'
+import { Section } from '../../blocks/Section/config'
 import { hero } from '@/heros/config'
 import { slugField } from '@/fields/slug'
 import { populatePublishedAt } from '../../hooks/populatePublishedAt'
@@ -74,7 +71,7 @@ export const Pages: CollectionConfig<'pages'> = {
             {
               name: 'layout',
               type: 'blocks',
-              blocks: [CallToAction, Content, MediaBlock, FormBlock],
+              blocks: [Section],
               required: true,
               admin: {
                 initCollapsed: true,
@@ -98,7 +95,6 @@ export const Pages: CollectionConfig<'pages'> = {
             MetaImageField({
               relationTo: 'media',
             }),
-
             MetaDescriptionField({}),
             PreviewField({
               // if the `generateUrl` function is configured
@@ -112,18 +108,21 @@ export const Pages: CollectionConfig<'pages'> = {
         },
       ],
     },
+    ...slugField(),
     {
       name: 'publishedAt',
       type: 'date',
       admin: {
         position: 'sidebar',
+        date: {
+          pickerAppearance: 'dayAndTime',
+        },
       },
     },
-    ...slugField(),
   ],
   hooks: {
-    afterChange: [revalidatePage],
     beforeChange: [populatePublishedAt],
+    afterChange: [revalidatePage],
     afterDelete: [revalidateDelete],
   },
   versions: {

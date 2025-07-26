@@ -17,27 +17,36 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
   }
 
   return (
-    <div className="container my-16">
-      <div className="grid grid-cols-4 lg:grid-cols-12 gap-y-8 gap-x-16">
-        {columns &&
-          columns.length > 0 &&
-          columns.map((col, index) => {
-            const { enableLink, link, richText, size } = col
+    <div
+      className={`grid grid-cols-${Math.min(columns?.length ?? 0, 12)} lg:grid-cols-${Math.min(
+        columns?.length ?? 0,
+        12,
+      )} gap-y-8 gap-x-16`}
+    >
+      {columns &&
+        columns.length > 0 &&
+        columns.map((col, index) => {
+          const { enableLink, link, richText, size } = col
 
-            return (
-              <div
-                className={cn(`col-span-4 lg:col-span-${colsSpanClasses[size!]}`, {
+          return (
+            <div
+              className={cn(
+                `col-span-${Math.min(columns?.length ?? 0, 4)} lg:col-span-${Math.min(
+                  columns?.length ?? 0,
+                  parseInt(colsSpanClasses[size!]),
+                )}`,
+                {
                   'md:col-span-2': size !== 'full',
-                })}
-                key={index}
-              >
-                {richText && <RichText data={richText} enableGutter={false} />}
+                },
+              )}
+              key={index}
+            >
+              {richText && <RichText data={richText} enableGutter={false} />}
 
-                {enableLink && <CMSLink {...link} />}
-              </div>
-            )
-          })}
-      </div>
+              {enableLink && <CMSLink {...link} />}
+            </div>
+          )
+        })}
     </div>
   )
 }

@@ -87,6 +87,14 @@ export default buildConfig({
         return authHeader === `Bearer ${process.env.CRON_SECRET}`
       },
     },
+    jobsCollectionOverrides: ({ defaultJobsCollection }) => {
+      if (!defaultJobsCollection.admin) {
+        defaultJobsCollection.admin = {}
+      }
+
+      defaultJobsCollection.admin.hidden = false
+      return defaultJobsCollection
+    },
     tasks: [],
   },
 })
