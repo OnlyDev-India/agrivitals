@@ -383,6 +383,7 @@ export interface ContentBlock {
  * via the `definition` "MediaBlock".
  */
 export interface MediaBlock {
+  fullWidth?: boolean | null;
   media: number | Media;
   id?: string | null;
   blockName?: string | null;
@@ -979,6 +980,7 @@ export interface ContentBlockSelect<T extends boolean = true> {
  * via the `definition` "MediaBlock_select".
  */
 export interface MediaBlockSelect<T extends boolean = true> {
+  fullWidth?: T;
   media?: T;
   id?: T;
   blockName?: T;

@@ -91,6 +91,10 @@ export const FormBlock: React.FC<
 
           setIsLoading(false)
           setHasSubmitted(true)
+          formMethods.reset(formFromProps.fields)
+          setTimeout(() => {
+            setHasSubmitted(false)
+          }, 1500)
 
           if (confirmationType === 'redirect' && redirect) {
             const { url } = redirect
@@ -110,7 +114,7 @@ export const FormBlock: React.FC<
 
       void submitForm()
     },
-    [router, formID, redirect, confirmationType],
+    [router, formID, redirect, confirmationType, formFromProps.fields, formMethods],
   )
 
   return (
@@ -151,8 +155,14 @@ export const FormBlock: React.FC<
                   })}
               </div>
 
-              <Button form={formID} type="submit" variant="default">
-                {submitButtonLabel}
+              <Button
+                form={formID}
+                disabled={isLoading}
+                type="submit"
+                variant="default"
+                className="w-full"
+              >
+                {isLoading ? 'Submitting...' : submitButtonLabel}
               </Button>
             </form>
           )}

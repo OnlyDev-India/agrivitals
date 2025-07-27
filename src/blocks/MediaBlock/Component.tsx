@@ -16,17 +16,18 @@ type Props = MediaBlockProps & {
   imgClassName?: string
   staticImage?: StaticImageData
   disableInnerContainer?: boolean
+  fullWidth?: boolean | null
 }
 
 export const MediaBlock: React.FC<Props> = (props) => {
   const {
     captionClassName,
     className,
-    enableGutter = true,
     imgClassName,
     media,
     staticImage,
     disableInnerContainer,
+    fullWidth,
   } = props
 
   let caption
@@ -37,14 +38,17 @@ export const MediaBlock: React.FC<Props> = (props) => {
       className={cn(
         '',
         {
-          container: enableGutter,
+          'mx-[-30px] xl:mx-[-60px]': fullWidth,
         },
+        // {
+        //   container: enableGutter,
+        // },
         className,
       )}
     >
       {(media || staticImage) && (
         <Media
-          imgClassName={cn('border border-border rounded-[0.8rem]', imgClassName)}
+          imgClassName={cn('rounded-[0.8rem] w-full', imgClassName)}
           resource={media}
           src={staticImage}
         />

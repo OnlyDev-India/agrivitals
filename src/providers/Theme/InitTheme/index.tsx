@@ -39,6 +39,8 @@ export const InitTheme: React.FC = () => {
       }
     }
 
+    console.log('themeToSet', themeToSet)
+
     document.documentElement.setAttribute('data-theme', themeToSet)
   })();
   `,

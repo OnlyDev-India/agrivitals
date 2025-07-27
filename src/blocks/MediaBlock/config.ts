@@ -5,6 +5,11 @@ export const MediaBlock: Block = {
   interfaceName: 'MediaBlock',
   fields: [
     {
+      name: 'fullWidth',
+      type: 'checkbox',
+      defaultValue: false,
+    },
+    {
       name: 'media',
       type: 'upload',
       relationTo: 'media',

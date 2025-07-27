@@ -40,11 +40,8 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
     if (themeIsValid(preference)) {
       themeToSet = preference
     } else {
-      const implicitPreference = getImplicitPreference()
-
-      if (implicitPreference) {
-        themeToSet = implicitPreference
-      }
+      // Always default to light theme if no preference is set
+      themeToSet = 'light'
     }
 
     document.documentElement.setAttribute('data-theme', themeToSet)

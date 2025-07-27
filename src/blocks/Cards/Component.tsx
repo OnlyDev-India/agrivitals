@@ -1,8 +1,7 @@
 'use client'
 import React, { useRef, useState, useEffect } from 'react'
-import { CMSLink } from '@/components/Link'
 import { Media } from '@/components/Media'
-import type { Page, Media as MediaType } from '@/payload-types'
+import type { Media as MediaType } from '@/payload-types'
 
 export type CardItem = {
   title: string
@@ -11,7 +10,7 @@ export type CardItem = {
   link?: {
     url?: string
     label?: string
-    reference?: any
+    reference?: any // eslint-disable-line @typescript-eslint/no-explicit-any
   }
 }
 
@@ -131,7 +130,7 @@ export const CardsBlock: React.FC<CardsBlockProps> = ({ title, description, card
             {cards.map((card, index) => (
               <div
                 key={index}
-                className={`flex-shrink-0 w-72 bg-white rounded-xl overflow-hidden transition-all duration-300 transform hover:${
+                className={`flex-shrink-0 w-72 rounded-xl overflow-hidden transition-all duration-300 transform hover:${
                   index % 2 === 1 ? 'translate-y-6' : '-translate-y-1'
                 } ${index % 2 === 1 ? 'translate-y-8' : ''}`}
               >
@@ -151,6 +150,9 @@ export const CardsBlock: React.FC<CardsBlockProps> = ({ title, description, card
                   <h3 className="text-lg font-semibold text-gray-900 mb-2 line-clamp-2 group-hover/card:text-green-600 transition-colors duration-300">
                     {card.title}
                   </h3>
+                  <p className="text-gray-600 mb-2 line-clamp-2 group-hover/card:text-green-600 transition-colors duration-300 text-xs">
+                    {card.description}
+                  </p>
 
                   {/* Number indicator */}
                   <div className="absolute bottom-3 right-5 text-xs text-gray-400 font-medium">

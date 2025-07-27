@@ -4,7 +4,7 @@ import RichText from '@/components/RichText'
 
 type Props = {
   className?: string
-  content: any
+  content: any // eslint-disable-line @typescript-eslint/no-explicit-any
   style: 'info' | 'warning' | 'error' | 'success'
 }
 
