@@ -75,7 +75,7 @@ export default function Hero() {
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="text-center space-y-4 relative z-10">
                     <img
-                      src="/product.png"
+                      src="product.png"
                       alt="Solar Dryer Product"
                       className="w-[28rem] h-[28rem] md:w-[32rem] md:h-[32rem] object-contain z-0"
                     />
