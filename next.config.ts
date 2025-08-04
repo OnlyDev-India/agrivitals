@@ -5,7 +5,7 @@ const isProd = process.env.NODE_ENV === "production";
 
 const nextConfig: NextConfig = {
   /* config options here */
-  basePath: isProd ? "/landing-starter-kit" : "",
+  basePath: isProd ? "/agrivitals" : "",
   output: "export",
   distDir: "dist",
   images: {
