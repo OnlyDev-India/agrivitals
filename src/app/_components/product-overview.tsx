@@ -128,7 +128,7 @@ export default function ProductOverview() {
               </h3>
               <div className="flex items-center justify-center">
                 <img 
-                  src="/product.png" 
+                  src="product.png" 
                   alt="Agrivitals Solar Dryer" 
                   className="w-full max-w-md h-auto object-contain"
                 />

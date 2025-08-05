@@ -1,13 +1,13 @@
 import NextBundleAnalyzer from "@next/bundle-analyzer";
 import type { NextConfig } from "next";
 
-const isProd = process.env.NODE_ENV === "production";
+// const isProd = process.env.NODE_ENV === "production";
 
 const nextConfig: NextConfig = {
   /* config options here */
-  basePath: isProd ? "/agrivitals" : "",
-  output: "export",
-  distDir: "dist",
+  // basePath: isProd ? "/agrivitals" : "",
+  // output: "export",
+  // distDir: "dist",
   images: {
     unoptimized: true,
   },
