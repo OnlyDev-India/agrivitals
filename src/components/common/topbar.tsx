@@ -1,8 +1,9 @@
 "use client";
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import Container from "@/components/ui/container";
 import { Menu, X } from "lucide-react";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 const navItems = [
   { name: "Home", href: "#home" },
@@ -17,7 +18,6 @@ const navItems = [
 export default function Topbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
-  const router = useRouter();
   const pathname = usePathname();
 
   useEffect(() => {
@@ -61,7 +61,7 @@ export default function Topbar() {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [pathname]);
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -75,36 +75,12 @@ export default function Topbar() {
     }
   };
 
-  const handleNavClick = (href: string, sectionId: string) => {
-    setIsOpen(false);
-
-    // Check if it's an external page link
-    if (href.startsWith("/")) {
-      router.push(href);
-      return;
-    }
-
-    // Handle internal section links
-    if (href.startsWith("#")) {
-      // If we're not on the home page, navigate to home with hash
-      if (pathname !== "/") {
-        router.push(`/${href}`);
-        return;
-      }
-
-      // If we're on home page, scroll to section
-      setActiveSection(sectionId);
-      router.push(`/${href}`);
-      scrollToSection(sectionId);
-    }
-  };
-
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md border-b border-gray-200 dark:border-gray-700">
       <Container>
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <div className="flex items-center">
+          <Link href="/" className="flex items-center">
             <div className="w-8 h-8 bg-green-600 rounded-lg flex items-center justify-center mr-3">
               <svg
                 className="w-5 h-5 text-white"
@@ -123,7 +99,7 @@ export default function Topbar() {
             <span className="text-xl font-bold text-gray-900 dark:text-white">
               Agrivitals
             </span>
-          </div>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
@@ -133,17 +109,36 @@ export default function Topbar() {
                 : "";
               let isActive = false;
 
-                if (item.href.startsWith("/")) {
-                  isActive = pathname === item.href;
-                } else if (item.href.startsWith("#")) {
-                  // For section links, only show active on home page
-                  isActive = pathname === "/" && activeSection === sectionId;
-                }
+              if (item.href.startsWith("/")) {
+                isActive = pathname === item.href;
+              } else if (item.href.startsWith("#")) {
+                // For section links, only show active on home page
+                isActive = pathname === "/" && activeSection === sectionId;
+              }
 
               return (
-                <button
+                <Link
                   key={item.name}
-                  onClick={() => handleNavClick(item.href, sectionId)}
+                  href={item.href.startsWith("#") ? `/${item.href}` : item.href}
+                  onClick={(e) => {
+                    if (item.href.startsWith("#")) {
+                      e.preventDefault();
+                      setIsOpen(false);
+                      
+                      // If we're not on the home page, navigate to home with hash
+                      if (pathname !== "/") {
+                        window.location.href = `/${item.href}`;
+                        return;
+                      }
+
+                      // If we're on home page, scroll to section
+                      setActiveSection(sectionId);
+                      window.location.hash = item.href;
+                      scrollToSection(sectionId);
+                    } else {
+                      setIsOpen(false);
+                    }
+                  }}
                   className={`text-sm font-medium transition-colors duration-200 ${
                     isActive
                       ? "text-green-600 dark:text-green-400"
@@ -151,7 +146,7 @@ export default function Topbar() {
                   }`}
                 >
                   {item.name}
-                </button>
+                </Link>
               );
             })}
           </div>
@@ -182,9 +177,28 @@ export default function Topbar() {
                 }
 
                 return (
-                  <button
+                  <Link
                     key={item.name}
-                    onClick={() => handleNavClick(item.href, sectionId)}
+                    href={item.href.startsWith("#") ? `/${item.href}` : item.href}
+                    onClick={(e) => {
+                      if (item.href.startsWith("#")) {
+                        e.preventDefault();
+                        setIsOpen(false);
+                        
+                        // If we're not on the home page, navigate to home with hash
+                        if (pathname !== "/") {
+                          window.location.href = `/${item.href}`;
+                          return;
+                        }
+
+                        // If we're on home page, scroll to section
+                        setActiveSection(sectionId);
+                        window.location.hash = item.href;
+                        scrollToSection(sectionId);
+                      } else {
+                        setIsOpen(false);
+                      }
+                    }}
                     className={`block w-full text-left px-4 py-2 text-sm font-medium rounded-lg transition-colors duration-200 ${
                       isActive
                         ? "text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20"
@@ -192,7 +206,7 @@ export default function Topbar() {
                     }`}
                   >
                     {item.name}
-                  </button>
+                  </Link>
                 );
               })}
             </div>
