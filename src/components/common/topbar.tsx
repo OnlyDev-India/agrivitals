@@ -6,13 +6,13 @@ import { Menu, X } from "lucide-react";
 import { usePathname } from "next/navigation";
 
 const navItems = [
-  { name: "Home", href: "#home" },
-  { name: "Features", href: "#features" },
-  { name: "How It Works", href: "#how-it-works" },
+  { name: "Home", href: "/#home" },
+  { name: "Features", href: "/#features" },
+  { name: "How It Works", href: "/#how-it-works" },
   { name: "Product", href: "/product" },
   { name: "About", href: "/about" },
   { name: "Contact", href: "/contact" },
-  { name: "FAQ", href: "#faq" },
+  { name: "FAQ", href: "/#faq" },
 ];
 
 export default function Topbar() {
@@ -119,7 +119,7 @@ export default function Topbar() {
               return (
                 <Link
                   key={item.name}
-                  href={item.href.startsWith("#") ? `/${item.href}` : item.href}
+                  href={item.href}
                   onClick={(e) => {
                     if (item.href.startsWith("#")) {
                       // e.preventDefault();
@@ -179,7 +179,7 @@ export default function Topbar() {
                 return (
                   <Link
                     key={item.name}
-                    href={item.href.startsWith("#") ? `/${item.href}` : item.href}
+                    href={item.href}
                     onClick={(e) => {
                       if (item.href.startsWith("#")) {
                         // e.preventDefault();
