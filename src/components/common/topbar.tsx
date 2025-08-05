@@ -120,25 +120,25 @@ export default function Topbar() {
                 <Link
                   key={item.name}
                   href={item.href}
-                  onClick={(e) => {
-                    if (item.href.startsWith("#")) {
-                      // e.preventDefault();
-                      setIsOpen(false);
+                  // onClick={(e) => {
+                  //   if (item.href.startsWith("#")) {
+                  //     // e.preventDefault();
+                  //     setIsOpen(false);
                       
-                      // // If we're not on the home page, navigate to home with hash
-                      // if (pathname !== "/") {
-                      //   window.location.href = `/${item.href}`;
-                      //   return;
-                      // }
+                  //     // // If we're not on the home page, navigate to home with hash
+                  //     // if (pathname !== "/") {
+                  //     //   window.location.href = `/${item.href}`;
+                  //     //   return;
+                  //     // }
 
-                      // If we're on home page, scroll to section
-                      setActiveSection(sectionId);
-                      // window.location.hash = item.href;
-                      scrollToSection(sectionId);
-                    } else {
-                      setIsOpen(false);
-                    }
-                  }}
+                  //     // If we're on home page, scroll to section
+                  //     setActiveSection(sectionId);
+                  //     // window.location.hash = item.href;
+                  //     scrollToSection(sectionId);
+                  //   } else {
+                  //     setIsOpen(false);
+                  //   }
+                  // }}
                   className={`text-sm font-medium transition-colors duration-200 ${
                     isActive
                       ? "text-green-600 dark:text-green-400"
@@ -180,25 +180,25 @@ export default function Topbar() {
                   <Link
                     key={item.name}
                     href={item.href}
-                    onClick={(e) => {
-                      if (item.href.startsWith("#")) {
-                        // e.preventDefault();
-                        setIsOpen(false);
+                    // onClick={(e) => {
+                    //   if (item.href.startsWith("#")) {
+                    //     // e.preventDefault();
+                    //     setIsOpen(false);
                         
-                        // // If we're not on the home page, navigate to home with hash
-                        // if (pathname !== "/") {
-                        //   window.location.href = `/${item.href}`;
-                        //   return;
-                        // }
+                    //     // // If we're not on the home page, navigate to home with hash
+                    //     // if (pathname !== "/") {
+                    //     //   window.location.href = `/${item.href}`;
+                    //     //   return;
+                    //     // }
 
-                        // If we're on home page, scroll to section
-                        setActiveSection(sectionId);
-                        // window.location.hash = item.href;
-                        scrollToSection(sectionId);
-                      } else {
-                        setIsOpen(false);
-                      }
-                    }}
+                    //     // If we're on home page, scroll to section
+                    //     setActiveSection(sectionId);
+                    //     // window.location.hash = item.href;
+                    //     scrollToSection(sectionId);
+                    //   } else {
+                    //     setIsOpen(false);
+                    //   }
+                    // }}
                     className={`block w-full text-left px-4 py-2 text-sm font-medium rounded-lg transition-colors duration-200 ${
                       isActive
                         ? "text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20"
