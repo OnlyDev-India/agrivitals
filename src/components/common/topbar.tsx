@@ -122,7 +122,7 @@ export default function Topbar() {
                   href={item.href.startsWith("#") ? `/${item.href}` : item.href}
                   onClick={(e) => {
                     if (item.href.startsWith("#")) {
-                      e.preventDefault();
+                      // e.preventDefault();
                       setIsOpen(false);
                       
                       // // If we're not on the home page, navigate to home with hash
@@ -182,7 +182,7 @@ export default function Topbar() {
                     href={item.href.startsWith("#") ? `/${item.href}` : item.href}
                     onClick={(e) => {
                       if (item.href.startsWith("#")) {
-                        e.preventDefault();
+                        // e.preventDefault();
                         setIsOpen(false);
                         
                         // // If we're not on the home page, navigate to home with hash
