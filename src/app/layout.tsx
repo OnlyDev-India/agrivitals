@@ -3,7 +3,7 @@ import "./globals.css";
 import ThemeProvider from "../providers/ThemeProvider";
 import { siteConfig } from "@/config/site";
 import type { Metadata, Viewport } from "next";
-import Topbar from "./_components/topbar";
+import Topbar from "@/components/common/topbar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
