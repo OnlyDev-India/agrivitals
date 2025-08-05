@@ -185,15 +185,15 @@ export default function Topbar() {
                         e.preventDefault();
                         setIsOpen(false);
                         
-                        // If we're not on the home page, navigate to home with hash
-                        if (pathname !== "/") {
-                          window.location.href = `/${item.href}`;
-                          return;
-                        }
+                        // // If we're not on the home page, navigate to home with hash
+                        // if (pathname !== "/") {
+                        //   window.location.href = `/${item.href}`;
+                        //   return;
+                        // }
 
                         // If we're on home page, scroll to section
                         setActiveSection(sectionId);
-                        window.location.hash = item.href;
+                        // window.location.hash = item.href;
                         scrollToSection(sectionId);
                       } else {
                         setIsOpen(false);
